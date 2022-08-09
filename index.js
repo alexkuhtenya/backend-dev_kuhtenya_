@@ -50,7 +50,8 @@ app.get("/", (req, res) => {
 
 app.post('/upload' , upload.single('image'), (req, res) => {
 try {
-    res.send('image uploaded')
+    res.status(210).json(req.file)
+
 } catch(e) {
     console.log(req.data)
 }})
