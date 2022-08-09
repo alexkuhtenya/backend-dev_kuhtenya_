@@ -49,9 +49,11 @@ app.get("/", (req, res) => {
 })
 
 app.post('/upload' , upload.single('image'), (req, res) => {
-res.send(req.data)
+try {
+    res.send('image uploaded')
+} catch(e) {
     console.log(req.data)
-})
+}})
 
 
 const start = async () => {
