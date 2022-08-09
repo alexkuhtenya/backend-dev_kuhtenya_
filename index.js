@@ -9,50 +9,48 @@ const GridFsStorage = require('multer-gridfs-storage')
 const Grid = require('gridfs-stream')
 const methodOverride = require('method-override')
 const bodyParser = require("body-parser");
+const {diskStorage} = require("multer");
 require('dotenv').config()
 
 const mongoURL = 'mongodb+srv://kuhtenya:123321qweH@cluster0.gc6qdci.mongodb.net/?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000
 const app = express()
 
+
+
 app.use(methodOverride('_method'))
 app.use(bodyParser.json())
 app.use("/api" , apiRouter)
 
-const conn = mongoose.createConnection(mongoURL)
 
-let gfs;
-conn.once('open' , () => {
-    gfs = Grid(conn.db, mongoose.mongo)
-    gfs.collection('IMG')
+
+const storage = multer.diskStorage({
+    destination :(req, file ,cb) => {
+        cb(null, 'images')
+    },
+    filename:(req , file, cb) =>{
+        console.log(file)
+        cb(null , Date.now() + path.extname(file.originalname))
+    }
 })
 
-const storage = new GridFsStorage({
-    url: mongoURL,
-    file: (req, file) => {
-        return new Promise((resolve, reject) => {
-            crypto.randomBytes(16, (err, buf) => {
-                if (err) {
-                    return reject(err);
-                }
-                const filename = buf.toString('hex') + path.extname(file.originalname);
-                const fileInfo = {
-                    filename: filename,
-                    bucketName: 'uploads'
-                };
-                resolve(fileInfo);
-            });
-        });
-    }
-});
-const upload = multer({ storage });
+const upload = multer({storage:storage} );
+
+const conn = mongoose.createConnection(mongoURL)
+
+app.set("view engine" , "ejs")
+
+app.get('/upload' ,(req ,res) =>{
+    res.render('upload');
+})
 
 app.get("/", (req, res) => {
     return res.status(200).json({message: "привет"})
 })
 
-app.post('/upload' ,upload.single('file'), (req, res) => {
-res.redirect('/api/work/addWorker')
+app.post('/upload' , upload.single('image'), (req, res) => {
+res.send('image uploaded')
+    console.log(req.data)
 })
 
 
