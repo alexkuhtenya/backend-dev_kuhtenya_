@@ -5,7 +5,7 @@ class workerController{
     async addWorker(req, res) {
         try {
         const {fullName, workType, bumpix ,description, inst , image} = req.body
-        const worker = new Worker ( {fullName, workType,description, bumpix , inst , image})
+        const worker = new Worker ( {fullName, workType,descriptiosn, bumpix , inst , image})
         await worker.save()
         console.log('работник добавлен успешно')
             return res.json({worker})
