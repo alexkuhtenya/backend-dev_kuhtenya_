@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 5000
 const app = express()
 
 
-
+app.use('/images' , express.static(path.join(__dirname , 'images')))
 app.use(methodOverride('_method'))
 app.use(bodyParser.json())
 app.use("/api" , apiRouter)
@@ -26,7 +26,7 @@ app.use("/api" , apiRouter)
 
 const storage = multer.diskStorage({
     destination :(req, file ,cb) => {
-        cb(null, 'images')
+        cb(null, 'images/')
     },
     filename:(req , file, cb) =>{
         console.log(file)
