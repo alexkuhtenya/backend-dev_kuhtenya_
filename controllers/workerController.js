@@ -10,7 +10,7 @@ class workerController{
         console.log('работник добавлен успешно')
             return res.json({worker})
         } catch(e) {
-            res.status(500).json({message: 'ошибка при добавлении работника'})
+            res.status(500).json(e.messages)
          console.log(e)
         }
     }
