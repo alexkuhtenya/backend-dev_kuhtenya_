@@ -49,7 +49,7 @@ app.get("/", (req, res) => {
 })
 
 app.post('/upload' , upload.single('image'), (req, res) => {
-res.send(req.body)
+res.send(req.data)
     console.log(req.data)
 })
 
