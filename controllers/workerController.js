@@ -4,8 +4,8 @@ const Worker = require('../models/Workers')
 class workerController{
     async addWorker(req, res) {
         try {
-        const {fullName, workType, bumpix , inst , IMG} = req.body
-        const worker = new Worker ( {fullName, workType, bumpix , inst , IMG})
+        const {fullName, workType, bumpix , inst , image} = req.body
+        const worker = new Worker ( {fullName, workType, bumpix , inst , image})
         await worker.save()
         console.log('работник добавлен успешно')
             return res.json({worker})
