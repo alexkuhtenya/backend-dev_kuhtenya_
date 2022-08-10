@@ -4,11 +4,18 @@ const Actions = require('../models/actions')
 class actionsController {
     async addActions (req, res){
         try{
-            const {title,description} = req.body
-            const action = new Actions({title,description})
-            await action.save()
+            const update = { title: req.body.title , description : req.body.description}
+            Actions.updateOne( {},update ,(err) =>{
+                if(err){
+                    console.log(err)
+                } else {
+                    console.log('success')
+                }
+            })
+
+
             console.log('Акции добавлена')
-            return res.json({action})
+            res.status(200).json(Actions)
         } catch(e){
            res.status(500).json(e.message)
             console.log(e);
