@@ -4,6 +4,8 @@ const controller = require('../controllers/actionsController')
 
 router.post('/actions' , controller.addActions)
 
+router.get('/actions', controller.getActions)
+
 router.put('/change', controller.editActions)
 
 module.exports = router

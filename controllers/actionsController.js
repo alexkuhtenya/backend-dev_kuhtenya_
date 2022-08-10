@@ -1,5 +1,6 @@
 const Actions = require('../models/actions')
 
+
 class actionsController {
     async addActions (req, res){
         try{
@@ -13,7 +14,19 @@ class actionsController {
             console.log(e);
         }
     }
-     async editActions (req, res) {
+
+    async getActions(req, res) {
+        try {
+            const action = await Actions.find()
+            res.json(action)
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+
+
+async editActions (req, res) {
         try{
             const collections = db.getCollection('actions')
             const item ={

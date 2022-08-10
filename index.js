@@ -38,7 +38,7 @@ const upload = multer({storage:storage} );
 
 const conn = mongoose.createConnection(mongoURL)
 
-app.set("view engine" , "ejs")
+
 
 app.get('/upload' ,(req ,res) =>{
     res.render('upload');
@@ -50,8 +50,9 @@ app.get("/", (req, res) => {
 
 app.post('/upload' , upload.single('image'), (req, res) => {
 try {
-    res.status(210).json(req.file)
-
+    if(req.file) {
+        res.json(req.file)
+    }
 } catch(e) {
     console.log(req.data)
 }})

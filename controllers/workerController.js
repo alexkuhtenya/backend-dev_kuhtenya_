@@ -15,8 +15,15 @@ class workerController{
         }
     }
 
+
     async addImage(req, res) {
+        
         try{
+
+
+        if (req.file) {
+            updated.image = req.file.path
+        }
 
         } catch(e){
             res.status(500).json({message: 'Ошибка при добавлении фотографии'})

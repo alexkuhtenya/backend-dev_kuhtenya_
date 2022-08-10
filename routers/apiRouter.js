@@ -7,7 +7,7 @@ const reviewRouter = require('./reviewRouter')
 
 router.use('/auth', authRouter);
 router.use('/work', workersRouter);
-router.use('/act', actionRouter);
+router.use(actionRouter);
 router.use('/review', reviewRouter);
 
 module.exports = router;
