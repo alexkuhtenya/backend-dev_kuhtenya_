@@ -5,7 +5,7 @@ class actionsController {
     async addActions (req, res){
         try{
             const update = { title: req.body.title , description : req.body.description}
-            Actions.updateOne( {},update ,(err) =>{
+            Actions.updateOne( {    },update ,(err) =>{
                 if(err){
                     console.log(err)
                 } else {

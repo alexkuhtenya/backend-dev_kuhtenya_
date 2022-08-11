@@ -10,6 +10,7 @@ const Grid = require('gridfs-stream')
 const methodOverride = require('method-override')
 const bodyParser = require("body-parser");
 const {diskStorage} = require("multer");
+const fileUpload = require('express-fileupload')
 require('dotenv').config()
 
 const mongoURL = 'mongodb+srv://kuhtenya:123321qweH@cluster0.gc6qdci.mongodb.net/?retryWrites=true&w=majority'
@@ -20,6 +21,7 @@ const app = express()
 app.use('/images' , express.static(path.join(__dirname , 'images')))
 app.use(methodOverride('_method'))
 app.use(bodyParser.json())
+app.use(fileUpload({}))
 app.use("/api" , apiRouter)
 
 
