@@ -19,22 +19,9 @@ class reviewController {
 
     async addReview (req, res) {
         try{
-            const {Name, email , userReview} = req.body
-            const review = new Review({Name , email , userReview})
+            const {Name, email , userReview, reply} = req.body
+            const review = new Review({Name , email , userReview,reply})
             await review.save()
-            let mailOptions = {
-                from: process.env.SMTP_USER,
-                to: email,
-                subject: '',
-                text: 'Спасибо за оставленый отзыв!'
-            };
-           await transporter.sendMail(mailOptions, function(err, data) {
-                if (err) {
-                    console.log("Error " + err);
-                } else {
-                    console.log("Email sent successfully");
-                }
-            });
             console.log('success')
             return res.json({review})
         } catch(e) {
@@ -43,6 +30,28 @@ class reviewController {
         }
     }
     async addReply(req, res){
+    try {
+        const update = {reply: req.body.reply}
+        const id = req.body._id
+        Review.findOneAndUpdate({id}, update, err => {
+            if (!err) {
+                return res.status(200).json({message: "success"})
+            } else {
+                res.status(500).json(err.message)
+            }
+        })
+    } catch(e){
+        res.status(500).json({message:'Ошибка'})
+    }
+    }
+
+    async getReview(req, res) {
+    try{
+        const review = await Review.find()
+        res.json(review)
+    } catch(e) {
+        console.log(e)
+    }
 
     }
 }
