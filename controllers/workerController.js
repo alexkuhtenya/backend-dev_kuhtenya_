@@ -13,7 +13,7 @@ const path = require('path')
             const worker = new Worker ( {fullName, workType,description, bumpix , inst , image: fileName })
             await worker.save()
         console.log('работник добавлен успешно')
-            return res.json({Worker})
+            return res.json(req.body)
         } catch(e) {
             res.status(400).json(e.message)
          console.log(e)
