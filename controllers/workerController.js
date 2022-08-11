@@ -11,9 +11,9 @@ const path = require('path')
                     let fileName = uuid.v4() + ".jpg"
            image.mv(path.resolve(__dirname,"..", "images", fileName))
             const worker = new Worker ( {fullName, workType,description, bumpix , inst , image: fileName })
-            await worker.save()
+          const a =  await worker.save()
         console.log('работник добавлен успешно')
-            return res.json({...req.body,id : req.body._id})
+            return res.json(a)
         } catch(e) {
             res.status(400).json(e.message)
          console.log(e)
