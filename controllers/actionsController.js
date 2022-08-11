@@ -29,27 +29,9 @@ class actionsController {
         } catch (e) {
             console.log(e)
         }
-    }
+    }}
 
 
-
-async editActions (req, res) {
-        try{
-            const collections = db.getCollection('actions')
-            const item ={
-                title: req.body.title,
-                description: req.body.description
-            }
-            const id = req.params.id
-            collections.update({
-                _id:id}, {
-                $set : item
-            })
-        } catch(e) {
-            return res.status(500).json(e.message)
-        }
-    }
-}
 
 module.exports = new actionsController()
 

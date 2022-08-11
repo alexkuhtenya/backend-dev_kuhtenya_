@@ -42,6 +42,9 @@ class reviewController {
             console.log(e);
         }
     }
+    async addReply(req, res){
+
+    }
 }
 
 module.exports = new reviewController()
