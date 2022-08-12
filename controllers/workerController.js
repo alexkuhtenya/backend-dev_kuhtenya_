@@ -11,7 +11,7 @@ const fs = require('fs')
                     const name = req.body.name
                     const imagee = {
                         img: {
-                            data : fs.readFileSync(path.join(__dirname +'../images' + req.file.filename) ),
+                            data : fs.readFileSync(path.join(__dirname +'../images' + req.file) ),
                             contentType: 'image/jpg'
                         }
                     }
@@ -22,7 +22,7 @@ const fs = require('fs')
         console.log('работник добавлен успешно')
             return res.json(worker)
         } catch(e) {
-            res.status(400).json(e.message)
+            res.status(500).json(e.message)
          console.log(e)
         }
     }
