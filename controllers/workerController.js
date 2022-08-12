@@ -8,6 +8,7 @@ const fs = require('fs')
         class workerController{
             async addWorker(req, res) {
                 try {
+                    const filedata = req.file
                     const imagee = {
                         img: {
                             data : fs.readFileSync(path.join(__dirname +'../images/' + req.body.filename) ),
@@ -27,15 +28,11 @@ const fs = require('fs')
     }
 
     async imageForWorker(req, res ){
+                try{
 
-
-                Worker.findOneAndUpdate({id}, {image : image} , err =>{
-                    if(err){
-                        console.log(err)
-                    } else {
-                        res.json({Worker})
-                    }
-                })
+                } catch (e) {
+                    console.log(e)
+                }
     }
 
     async Worker(req,res) {

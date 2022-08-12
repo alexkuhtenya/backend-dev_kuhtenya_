@@ -6,23 +6,25 @@ const path = require('path')
 const methodOverride = require('method-override')
 const bodyParser = require("body-parser");
 const fileUpload = require('express-fileupload')
-const Grid = require('gridfs-stream')
 const multer = require('multer')
 require('dotenv').config()
 
-Grid.mongo  =  mongoose.mongo
 
 const mongoURL = 'mongodb+srv://kuhtenya:123321qweH@cluster0.gc6qdci.mongodb.net/?retryWrites=true&w=majority'
 const PORT = process.env.PORT || 5000
 const app = express()
 
 
-app.use('/images' , express.static(path.join(__dirname , 'images')))
+app.use('/images', express.static(path.join(__dirname, 'images')))
 app.use(methodOverride('_method'))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
 app.use(fileUpload({}))
 app.use("/api" , apiRouter)
+
+
+
+
+
 
 
 
@@ -30,6 +32,7 @@ app.use("/api" , apiRouter)
 app.get("/", (req, res) => {
     return res.status(200).json({message: "привет"})
 })
+
 
 
 
