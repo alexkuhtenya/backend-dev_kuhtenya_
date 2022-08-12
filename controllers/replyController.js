@@ -1,5 +1,4 @@
 const Reply = require('../models/reply')
-const Review = require("../models/review");
 
 
 class replyController{

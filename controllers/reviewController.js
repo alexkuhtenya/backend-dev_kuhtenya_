@@ -1,5 +1,4 @@
 const Review = require('../models/review')
-const Actions = require("../models/actions");
 const nodemailer = require('nodemailer')
 
 class reviewController {

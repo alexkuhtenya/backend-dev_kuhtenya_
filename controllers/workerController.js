@@ -1,17 +1,24 @@
 const Worker = require('../models/Workers')
 const uuid = require('uuid')
 const path = require('path')
-const User = require("../models/User");
+const fs = require('fs')
+
 
 
         class workerController{
             async addWorker(req, res) {
                 try {
-                    const {fullName, workType, bumpix ,description, inst } = req.body
-                    const {image}= req.files
-                    let fileName = uuid.v4() + ".jpg"
-           image.mv(path.resolve(__dirname,"..", "images", fileName))
-            const worker = new Worker ( {fullName, workType,description, bumpix , inst , image: fileName })
+                    const id = req.body._id
+                    const name = req.body.name
+                    const imagee = {
+                        img: {
+                            data : fs.readFileSync(path.join(__dirname, '..' , '/images',`${name}`) ),
+                            contentType: 'image/jpg'
+                        }
+                    }
+                    const {fullName, workType, bumpix ,description, inst  } = req.body
+                    const {image} = imagee
+            const worker = new Worker ( {fullName, workType,description, bumpix , inst , image })
           await worker.save()
         console.log('работник добавлен успешно')
             return res.json(worker)
@@ -19,6 +26,29 @@ const User = require("../models/User");
             res.status(400).json(e.message)
          console.log(e)
         }
+    }
+
+    async imageForWorker(req, res ){
+
+
+                Worker.findOneAndUpdate({id}, {image : image} , err =>{
+                    if(err){
+                        console.log(err)
+                    } else {
+                        res.json({Worker})
+                    }
+                })
+    }
+
+    async Worker(req,res) {
+   await Worker.find({}, (err, items) => {
+        if(err) {
+            console.log(err);
+            res.status(500).send('An error occurred ', err)
+        } else{
+            res.render({items: items})
+        }
+        })
     }
 
     async getWorkers(req, res) {
@@ -30,7 +60,6 @@ const User = require("../models/User");
         }
 
     }
-
         }
 
 
