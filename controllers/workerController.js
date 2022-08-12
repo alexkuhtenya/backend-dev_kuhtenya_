@@ -8,10 +8,9 @@ const fs = require('fs')
         class workerController{
             async addWorker(req, res) {
                 try {
-                    const name = req.body.name
                     const imagee = {
                         img: {
-                            data : fs.readFileSync(path.join(__dirname +'../images' + req.file) ),
+                            data : fs.readFileSync(path.join(__dirname +'../images' + req.body.filename) ),
                             contentType: 'image/jpg'
                         }
                     }
