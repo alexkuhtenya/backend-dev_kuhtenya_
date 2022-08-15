@@ -11,7 +11,7 @@ const fs = require('fs')
                     const obj = {
                         name : req.body.name,
                         img: {
-                            data : fs.readFileSync(path.join(__dirname ,'..' , '/images/' + req.file) ),
+                            data : fs.readFileSync(path.join(__dirname ,'..' , '/images/' + req.body.name) ),
                             contentType: 'image/jpg'
                         }
                     }
