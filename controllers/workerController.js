@@ -10,7 +10,6 @@ const fs = require('fs')
                 try {
                     const obj = {
                         name : req.body.name,
-                        desc: req.body.desc,
                         img: {
                             data : fs.readFileSync(path.join(__dirname ,'..' , '/images/' + req.file.filename) ),
                             contentType: 'image/jpg'
@@ -21,7 +20,7 @@ const fs = require('fs')
             const worker = new Worker ( {fullName, workType,description, bumpix , inst },{image})
           await worker.save()
         console.log('работник добавлен успешно')
-            return res.json(worker.image)
+            return res.json(worker)
         } catch(e) {
             res.status(500).json(e.message)
          console.log(e)
