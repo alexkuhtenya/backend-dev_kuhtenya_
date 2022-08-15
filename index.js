@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const {connect: connect1, mongo} = require("mongoose");
 const apiRouter = require('./routers/apiRouter')
 const path = require('path')
-
 const bodyParser = require("body-parser");
 require('dotenv').config()
 
@@ -12,6 +11,17 @@ const mongoURL = 'mongodb+srv://kuhtenya:123321qweH@cluster0.gc6qdci.mongodb.net
 const PORT = process.env.PORT || 5000
 const app = express()
 
+const multer = require('multer')
+const storage = multer.diskStorage({
+    destination: (req, file, cb) =>{
+            cb ( null , 'images')
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname))
+    }
+})
+
+const upload = multer({storage : storage})
 
 
 
@@ -22,6 +32,10 @@ app.use("/api" , apiRouter)
 
 
 
+
+app.post('/upload', upload.single('image') , (req,res)=>{
+    res.json(req.file)
+} )
 
 app.get("/", (req, res) => {
     return res.status(200).json({message: "привет"})
