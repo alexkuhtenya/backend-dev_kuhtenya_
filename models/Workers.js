@@ -10,6 +10,7 @@ const Worker = new Schema({
     inst: {type: String},
     description :{type: String , required: true},
     image : {
+        name: String,
         img : {
             data: Buffer,
             contentType: String

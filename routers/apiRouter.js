@@ -5,13 +5,13 @@ const workersRouter = require('./workersRouter');
 const actionRouter = require('./actionRouter');
 const reviewRouter = require('./reviewRouter')
 const replyRouter = require('./replyRouter')
-const uploadRouter = require('./uploadRouter')
+
 
 router.use('/auth', authRouter);
 router.use('/work', workersRouter);
 router.use(actionRouter);
 router.use('/review', reviewRouter);
 router.use('/reply', replyRouter)
-router.use(uploadRouter)
+
 
 module.exports = router;

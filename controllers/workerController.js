@@ -8,19 +8,20 @@ const fs = require('fs')
         class workerController{
             async addWorker(req, res) {
                 try {
-                    const filedata = req.file
-                    const imagee = {
+                    const obj = {
+                        name : req.body.name,
+                        desc: req.body.desc,
                         img: {
-                            data : fs.readFileSync(path.join(__dirname +'../images/' + req.body.filename) ),
+                            data : fs.readFileSync(path.join(__dirname ,'..' , '/images/' + req.file.filename) ),
                             contentType: 'image/jpg'
                         }
                     }
                     const {fullName, workType, bumpix ,description, inst  } = req.body
-                    const {image} = imagee
-            const worker = new Worker ( {fullName, workType,description, bumpix , inst , image })
+                    const {image} = obj
+            const worker = new Worker ( {fullName, workType,description, bumpix , inst },{image})
           await worker.save()
         console.log('работник добавлен успешно')
-            return res.json(worker)
+            return res.json(worker.image)
         } catch(e) {
             res.status(500).json(e.message)
          console.log(e)

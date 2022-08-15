@@ -3,10 +3,8 @@ const mongoose = require('mongoose')
 const {connect: connect1, mongo} = require("mongoose");
 const apiRouter = require('./routers/apiRouter')
 const path = require('path')
-const methodOverride = require('method-override')
+
 const bodyParser = require("body-parser");
-const fileUpload = require('express-fileupload')
-const multer = require('multer')
 require('dotenv').config()
 
 
@@ -15,15 +13,11 @@ const PORT = process.env.PORT || 5000
 const app = express()
 
 
+
+
 app.use('/images', express.static(path.join(__dirname, 'images')))
-app.use(methodOverride('_method'))
 app.use(bodyParser.json())
-app.use(fileUpload({}))
 app.use("/api" , apiRouter)
-
-
-
-
 
 
 
