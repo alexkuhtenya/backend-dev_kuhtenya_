@@ -9,18 +9,23 @@ const fs = require('fs')
             async addWorker(req, res) {
                 try {
                     const obj = {
-                        name : req.body.name,
-                        img: {
-                            data : fs.readFileSync(path.join(__dirname ,'..' , '/images/' + req.file.name) ),
+                        fullName : req.body.fullName,
+                        workType: req.body.workType,
+                        description: req.body.description,
+                        bumpix: req.body.bumpix,
+                        inst: req.body.inst,
+                        image: {
+                            img : {
+                            data : fs.readFileSync(path.join(__dirname ,'..' , '/images/' + req.file.filename) ),
                             contentType: 'image/jpg'
+                            }
                         }
                     }
-                    const {fullName, workType, bumpix ,description, inst  } = req.body
-                    const {image} = obj
-            const worker = new Worker ( {fullName, workType,description, bumpix , inst },{image})
+
+            const worker = new Worker ( obj)
           await worker.save()
         console.log('работник добавлен успешно')
-            return res.json(worker)
+            return res.json(worker.image)
         } catch(e) {
             res.status(500).json(e.message)
          console.log(e)

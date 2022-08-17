@@ -19,7 +19,7 @@ class reviewController {
     async addReview (req, res) {
         try{
             const {Name, email , userReview, reply} = req.body
-            const review = new Review({Name , email , userReview,reply})
+            const review = new Review({name , email , userReview,reply})
             await review.save()
             console.log('success')
             return res.json({review})
@@ -51,7 +51,6 @@ class reviewController {
     } catch(e) {
         console.log(e)
     }
-
     }
 }
 

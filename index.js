@@ -3,7 +3,9 @@ const mongoose = require('mongoose')
 const {connect: connect1, mongo} = require("mongoose");
 const apiRouter = require('./routers/apiRouter')
 const path = require('path')
+const imgModel = require('./models/img');
 const bodyParser = require("body-parser");
+const fs = require('fs')
 require('dotenv').config()
 
 
@@ -29,6 +31,28 @@ app.use('/images', express.static(path.join(__dirname, 'images')))
 app.use(bodyParser.json())
 app.use("/api" , apiRouter)
 
+
+
+app.post('/pp', upload.single('image'), (req, res, next) => {
+
+    const obj = {
+        name: req.body.name,
+        desc: req.body.desc,
+        img: {
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
+    imgModel.create(obj, (err, item) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            // item.save();
+            res.redirect('/');
+        }
+    });
+});
 
 
 
