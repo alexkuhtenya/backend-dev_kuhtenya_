@@ -18,7 +18,7 @@ class reviewController {
 
     async addReview (req, res) {
         try{
-            const {Name, email , userReview, reply} = req.body
+            const {name, email , userReview, reply} = req.body
             const review = new Review({name , email , userReview,reply})
             await review.save()
             console.log('success')
