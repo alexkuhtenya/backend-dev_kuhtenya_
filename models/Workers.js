@@ -1,4 +1,6 @@
 const {Schema, model} = require('mongoose')
+const {isBase64} = require("validator");
+const buffer = require("buffer");
 
 
 
@@ -10,7 +12,8 @@ const Worker = new Schema({
     inst: {type: String},
     description :{type: String , required: true},
     image : {
-        data: String}
+    type: String
+    }
 })
 
 module.exports = model('Workers' , Worker)

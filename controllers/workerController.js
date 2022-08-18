@@ -13,14 +13,17 @@ const fs = require('fs')
                         workType: req.body.workType,
                         description: req.body.description,
                         bumpix: req.body.bumpix,
-                        inst: req.body.inst,
-                        image: req.body.image
+                        inst: req.body.inst ,
+                        image : req.body.image
                     }
+
+
+
 
             const worker = new Worker (obj)
           await worker.save()
         console.log('работник добавлен успешно')
-            return res.json(req.body.image)
+            return res.json(worker)
         } catch(e) {
             res.status(500).json(e.message)
          console.log(e)
