@@ -14,7 +14,8 @@ const fs = require('fs')
                         description: req.body.description,
                         bumpix: req.body.bumpix,
                         inst: req.body.inst,
-                        image: req.body.image}
+                        image: req.body.image
+                    }
 
             const worker = new Worker (obj)
           await worker.save()

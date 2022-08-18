@@ -9,7 +9,8 @@ const Worker = new Schema({
     bumpix :{type: String},
     inst: {type: String},
     description :{type: String , required: true},
-    image : {String}
+    image : {
+        data: String}
 })
 
 module.exports = model('Workers' , Worker)
