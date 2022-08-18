@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000
 const app = express()
 
 
-app.use('/images', express.static(path.join(__dirname, 'images')))
+app.use( express.static(path.join(__dirname, 'images')))
 app.use(bodyParser.json())
 app.use("/api" , apiRouter)
 

@@ -22,10 +22,10 @@ const fs = require('fs')
                         }
                     }
 
-            const worker = new Worker ( obj)
+            const worker = new Worker (obj)
           await worker.save()
         console.log('работник добавлен успешно')
-            return res.json()
+            return res.json(worker)
         } catch(e) {
             res.status(500).json(e.message)
          console.log(e)
