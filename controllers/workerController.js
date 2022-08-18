@@ -25,7 +25,7 @@ const fs = require('fs')
             const worker = new Worker ( obj)
           await worker.save()
         console.log('работник добавлен успешно')
-            return res.json(worker)
+            return res.json()
         } catch(e) {
             res.status(500).json(e.message)
          console.log(e)
