@@ -14,13 +14,7 @@ const fs = require('fs')
                         description: req.body.description,
                         bumpix: req.body.bumpix,
                         inst: req.body.inst,
-                        image: {
-
-                            data : fs.readFileSync(path.join(__dirname ,'..' , '/images/' + req.file.filename) ),
-                            contentType: 'image/jpg'
-
-                        }
-                    }
+                        image: req.body.image}
 
             const worker = new Worker (obj)
           await worker.save()
