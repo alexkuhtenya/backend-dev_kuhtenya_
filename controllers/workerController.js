@@ -15,10 +15,10 @@ const fs = require('fs')
                         bumpix: req.body.bumpix,
                         inst: req.body.inst,
                         image: {
-                            img : {
+
                             data : fs.readFileSync(path.join(__dirname ,'..' , '/images/' + req.file.filename) ),
                             contentType: 'image/jpg'
-                            }
+
                         }
                     }
 
