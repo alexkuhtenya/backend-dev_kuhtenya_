@@ -33,9 +33,12 @@ const fs = require('fs')
     }
 
     async imageForWorker(req, res ){
-                try{
-
-                } catch (e) {
+                try {
+                    const id = req.body._id
+                   const worker =  await Worker.findOne({id})
+                    res.json(worker)
+                }
+                 catch (e) {
                     console.log(e)
                 }
     }
