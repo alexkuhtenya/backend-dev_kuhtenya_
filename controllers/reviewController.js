@@ -18,7 +18,9 @@ class reviewController {
 
     async addReview (req, res) {
         try{
-            const {name, email , userReview, reply} = req.body
+
+
+            const {name, email , userReview,reply} = req.body
             const review = new Review({name , email , userReview,reply})
             await review.save()
             console.log('success')
@@ -32,7 +34,7 @@ class reviewController {
     try {
         const update = {reply: req.body.reply}
         const id = req.body._id
-        Review.findOneAndUpdate({id}, update, err => {
+        Review.findByIdAndUpdate(id, update, err => {
             if (!err) {
                 return res.status(200).json({message: "success"})
             } else {
