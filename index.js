@@ -4,7 +4,6 @@ const {connect: connect1, mongo} = require("mongoose");
 const apiRouter = require('./routers/apiRouter')
 const path = require('path')
 const bodyParser = require("body-parser");
-const fs = require('fs')
 require('dotenv').config()
 
 

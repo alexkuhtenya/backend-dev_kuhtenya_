@@ -1,7 +1,4 @@
 const {Schema, model} = require('mongoose')
-const {isBase64} = require("validator");
-const buffer = require("buffer");
-
 
 
 const Worker = new Schema({

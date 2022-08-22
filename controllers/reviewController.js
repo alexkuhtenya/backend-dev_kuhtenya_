@@ -46,6 +46,21 @@ class reviewController {
     }
     }
 
+    async delReview(req, res) {
+        try{
+            Review.findByIdAndRemove(req.body._id , err => {
+                if (!err) {
+                    res.status(200).json('отзыв успешно удален')
+                } else {
+                    res.status(500).json('ошибка при удалении отзыва')
+                }
+            })
+        } catch(e) {
+            console.log(e.message)
+            res.status(500).json('ошибка при удалении отзыва')
+        }
+    }
+
     async getReview(req, res) {
     try{
         const review = await Review.find()
