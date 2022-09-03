@@ -15,9 +15,7 @@ const app = express()
 
 app.use( express.static(path.join(__dirname, 'images')))
 app.use(bodyParser.json())
-app.use(cors({
-    origin: ['https://soroka-nailbar.web.app/']
-}))
+app.use(cors())
 app.use("/api" , apiRouter)
 
 
