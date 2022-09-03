@@ -68,6 +68,22 @@ class reviewController {
     }
     }
 
+    async changePub(req, res) {
+        try{
+            const update = {is_published: req.body.is_published}
+            const id = req.body._id
+            Review.findByIdAndUpdate(id , update , err => {
+                if (!err) {
+                    return res.status(200).json({message:'success'})
+                } else {
+                    res.status(500).json(err.message)
+                }
+            })
+        } catch(e) {
+            console.log(e)
+        }
+    }
+
     async getIsReview(req, res) {
         try{
             const review = await Review.find({is_published: true} , err =>{

@@ -10,6 +10,8 @@ router.get('/review', controller.getReview)
 
 router.get('/isReview', controller.getIsReview)
 
+router.patch('changePub' , controller.changePub)
+
 router.delete('/delReview', controller.delReview)
 
 module.exports = router
