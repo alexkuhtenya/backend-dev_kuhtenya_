@@ -5,10 +5,10 @@ const apiRouter = require('./routers/apiRouter')
 const path = require('path')
 const cors = require('cors')
 const bodyParser = require("body-parser");
-require('dotenv').config()
+const dotenv = require('dotenv').config()
 
 
-const mongoURL = 'mongodb+srv://kuhtenya:123321qweH@cluster0.gc6qdci.mongodb.net/?retryWrites=true&w=majority'
+const mongoURL = process.env.mongoConnect
 const PORT = process.env.PORT || 5000
 const app = express()
 
