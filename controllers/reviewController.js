@@ -18,8 +18,6 @@ class reviewController {
 
     async addReview (req, res) {
         try{
-
-
             const {name, email , userReview,reply} = req.body
             const review = new Review({name , email , userReview,reply})
             await review.save()
@@ -68,6 +66,21 @@ class reviewController {
     } catch(e) {
         console.log(e)
     }
+    }
+
+    async getIsReview(req, res) {
+        try{
+            const review = await Review.find({is_published: true} , err =>{
+                if (err) {
+                    res.status(500).json(err.message)
+                } else {
+                    res.status(200)
+                }
+            })
+            res.json(review)
+        } catch(e) {
+            console.log(e)
+        }
     }
 }
 

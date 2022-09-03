@@ -5,7 +5,8 @@ const Review = new Schema({
     name : {type: String , required : true},
     email : {type: String , required : false},
     userReview: {type: String , required : true},
-    reply: {type:String}
+    reply: {type:String},
+    is_published:{type : Boolean , require: true}
 })
 
 module.exports = model('Review' , Review)

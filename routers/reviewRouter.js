@@ -8,6 +8,8 @@ router.patch('/addReply' , controller.addReply)
 
 router.get('/review', controller.getReview)
 
+router.get('/isReview', controller.getIsReview)
+
 router.delete('/delReview', controller.delReview)
 
 module.exports = router

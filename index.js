@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const {connect: connect1, mongo} = require("mongoose");
 const apiRouter = require('./routers/apiRouter')
 const path = require('path')
+const cors = require('cors')
 const bodyParser = require("body-parser");
 require('dotenv').config()
 
@@ -14,7 +15,9 @@ const app = express()
 
 app.use( express.static(path.join(__dirname, 'images')))
 app.use(bodyParser.json())
+app.use(require('cors'))
 app.use("/api" , apiRouter)
+
 
 
 
