@@ -1,6 +1,6 @@
 const Router = require('express')
 const router = new Router()
-const controller = require('../controllers/workerController')
+const controller = require('../../controllers/Worker_controller/workerController')
 
 
 router.post('/addWorker' ,controller.addWorker)

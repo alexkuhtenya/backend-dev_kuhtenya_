@@ -1,8 +1,8 @@
-const Worker = require('../models/Workers')
+const Worker = require('../../models/Workers_model/Workers')
 
 
 
-class workerController {
+class WorkerController {
     async addWorker(req, res) {
         try {
             const obj = {
@@ -73,4 +73,4 @@ class workerController {
 }
 
 
-module.exports = new workerController()
+module.exports = new WorkerController()

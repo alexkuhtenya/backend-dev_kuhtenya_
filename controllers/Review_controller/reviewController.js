@@ -1,20 +1,9 @@
-const Review = require('../models/review')
+const Review = require('../../models/Review_model/review')
 const nodemailer = require('nodemailer')
+require('dotenv').config()
 
-class reviewController {
+class ReviewController {
 
-    constructor() {
-        this.transporter = nodemailer.createTransport({
-            host : process.env.SMTP_HOST,
-            port : process.env.SMTP_PORT,
-            secure:false,
-            auth:{
-                type: "OAuth2",
-                user: process.env.SMTP_USER,
-                pass: process.env.SMTP_PASSWORD
-            }
-        })
-    }
 
     async addReview (req, res) {
         try{
@@ -22,7 +11,30 @@ class reviewController {
             const review = new Review({name , email , userReview,reply})
             await review.save()
             console.log('success')
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                host: "smtp.gmail.com",
+                port : 587,
+                auth: {
+                    user : 'kuhtenyabiznes@gmail.com' ,
+                    pass: 'xenomorflingH',
+                }
+            });
+            const  mailOptions ={
+                from : 'kuhtenyabiznes@gmail.com',
+                to : 'vladavseev47@gmail.com',
+                subject: 'working',
+                text: 'real ez'
+            };
+            transporter.sendMail(mailOptions,function(error, info){
+                if (error) {
+                    console.log(error)
+                } else {
+                    console.log('есть!')
+                }
+            })
             return res.json({review})
+
         } catch(e) {
             res.status(500).json(e.message)
             console.log(e);
@@ -30,6 +42,7 @@ class reviewController {
     }
     async addReply(req, res){
     try {
+
         const update = {reply: req.body.reply}
         const id = req.body._id
         Review.findByIdAndUpdate(id, update, err => {
@@ -84,20 +97,15 @@ class reviewController {
         }
     }
 
-    async getIsReview(req, res) {
-        try{
-            const review = await Review.find({is_published: true} , err =>{
-                if (err) {
-                    res.status(500).json(err.message)
-                } else {
-                    res.status(200)
-                }
-            })
+    async isReview(req, res) {
+        try {
+            const review = await Review.find({is_published: true})
             res.json(review)
-        } catch(e) {
+        }  catch (e) {
             console.log(e)
         }
+
     }
 }
 
-module.exports = new reviewController()
+module.exports = new ReviewController()

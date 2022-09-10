@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const {connect: connect1, mongo} = require("mongoose");
-const apiRouter = require('./routers/apiRouter')
+const apiRouter = require('./routers/Api_router/apiRouter')
 const path = require('path')
 const cors = require('cors')
 const bodyParser = require("body-parser");
@@ -19,18 +19,9 @@ app.use(cors())
 app.use("/api" , apiRouter)
 
 
-
-
-
-
-
-
 app.get("/", (req, res) => {
     return res.status(200).json({message: "привет"})
 })
-
-
-
 
 
 const start = async () => {
